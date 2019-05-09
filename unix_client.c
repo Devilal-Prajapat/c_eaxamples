@@ -52,8 +52,10 @@ do{
   ret = write(data_socket,&i, sizeof(int));
   if(ret == -1){
     perror("write");
-    exit(EXIT_FAILURE);
+    break;
+    //exit(EXIT_FAILURE);
   }
+  printf("No. of bytes sent : %d , data sent : %d \n",ret, i);
 }while(1);
 
 memset(buffer,0,SIZE);
