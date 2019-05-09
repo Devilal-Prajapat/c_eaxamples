@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
 #include <errno.h>
 #include <string.h>
+#include <sys/types.h>
 #include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#include <sys/un.h>
+#include <unistd.h>
 
 #define SOCKET_NAME "/tmp/demoSock"
 #define SIZE 1024
-
-struct sockaddr_un{
-  sa_family_t sun_family;
-  char sun_path[108];
-};
+#if 0
+	struct sockaddr_un{
+  		sa_family_t sun_family;
+  		char sun_path[108];
+	};
+#endif
 
 int main(){
   int master_socket, data_socket;
@@ -24,13 +25,16 @@ int main(){
   int data;
   char buffer[SIZE];
   char msg[] ="Hello welcome to socket world!!!";
-  printf("%s", msg);
+  printf("%s\n", msg);
 // create a socket using socket syscall.
+  unlink(SOCKET_NAME);
   master_socket = socket(AF_UNIX,SOCK_STREAM,0);
   if(master_socket== -1){
     perror("Socket creation error\n");
     exit(1);
   }
+
+printf("Master socket created\n");
 memset(&server, 0, sizeof(struct sockaddr_un));
 server.sun_family = AF_UNIX;
 strncpy(server.sun_path,SOCKET_NAME,sizeof(server.sun_path)-1);
@@ -41,6 +45,7 @@ if(ret == -1){
   perror("bind");
   exit(1);
 }
+printf("Master socket Bind Success\n");
 //listen to connection.
 
 ret = listen(master_socket, 10);
@@ -49,7 +54,8 @@ if(ret ==-1)
   perror("listen");
   exit(1);
 }
-
+  
+printf("Master socket start listening\n");
 // accept the incomming connection 
 for(;;){
   printf("waiting for incoming connection");
