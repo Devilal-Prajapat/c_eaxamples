@@ -19,6 +19,7 @@ int dec_to_bin(int n)
         i = i*10;
     }
     printf("%d\n",bin);
+    return bin;
 }
 
 int bin_to_dec(int n)
@@ -33,6 +34,7 @@ int bin_to_dec(int n)
         i++;
     }
     printf("%d\n",dec);
+    return dec;
 }
 
 int main()
