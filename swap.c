@@ -18,5 +18,11 @@ int main(){
    y = x-y;
    x= x-y;
    printf("value after swap x : %d y : %d\n", x, y);
+   
+   /* using xor operator*/
+   x = x^y;
+   y = x^y;
+   x= x^y;
+   printf("value after swap x : %d y : %d\n", x, y);
    return 0;
 }
