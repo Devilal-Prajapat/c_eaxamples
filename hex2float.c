@@ -1,6 +1,16 @@
 #include <stdio.h>
 #include <stdint.h>
 
+// float to hex
+uint32_t float_to_hex(float val)
+{
+    uint32_t num =0 ;
+    float fval = val;    
+    num = *(uint32_t *)&fval;
+    printf("0x%x\n",num);
+    return num;
+}
+
 // 1. first method
 float hex2float(uint8_t *val, int len)
 {
@@ -41,9 +51,10 @@ int main()
     printf("Hello World\n");
     hex2float(arr1,4);
     hex2Float(arr1);
-    
-     hex2float(arr2,4);
+
+    hex2float(arr2,4);
     hex2Float(arr2);
+    float_to_hex(123.567);
 
     return 0;
 }
