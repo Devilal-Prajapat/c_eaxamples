@@ -44,7 +44,13 @@ int main()
     s1.branch = "EC";
     ofstream ofs("demo.txt");
     ofs<<s1;
+      s1.name = "Devil";
+    s1.rollno = 11;
+    s1.branch = "EC";
     ofs<<s1; 
+      s1.name = "Devid";
+    s1.rollno = 12;
+    s1.branch = "EC";
     ofs<<s1;
     ofs.close();
     
@@ -57,16 +63,13 @@ int main()
     cout<<s2.name<<" "<<s2.rollno<<" "<<s2.branch<<endl;
     ifs>>s2;
     cout<<s2.name<<" "<<s2.rollno<<" "<<s2.branch<<endl;
-    ifs>>s2;
-    cout<<s2.name<<" "<<s2.rollno<<" "<<s2.branch<<endl;
+    Student s3;
+    ifs>>s3;
+    cout<<s3.name<<" "<<s3.rollno<<" "<<s3.branch<<endl;
     if(ifs.eof())
     {
         cout<<"eof reached"<<endl;
     }
-     Student s3;
-    ifs>>s3;
-    cout<<s3.name<<" "<<s3.rollno<<" "<<s3.branch<<endl;
 
-    
     ifs.close();
 }
