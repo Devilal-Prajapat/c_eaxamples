@@ -4,6 +4,12 @@
 #include<iostream>
 using namespace std;
 
+template<class T>
+void fun(T p)
+{
+    p();
+}
+
 int main()
 {
     [](){cout<<"Hello"<<endl;}();
@@ -11,8 +17,9 @@ int main()
     int x = [](int a, int b){return a+b;}(10,10);
     int y = [](int a, int b)->int{return a+b;}(10,17);
     cout<<x<<" "<<y<<endl;
-    auto f =  [](){cout<<"Hello"<<endl;};
+    auto f =  [](){cout<<"Hi welcome"<<endl;};
     f();
+    fun(f);
     int c = 50;
     int d = 60;
     [c,d](){cout<<c<<" "<<d<<endl;}();
@@ -21,7 +28,7 @@ int main()
      int e = 90;
     // want to acsess all member reference is used
      [&](){cout<<++c<<" "<<++d<<" "<<e<<endl;}();
-    
+  
     
     return 0;
 }
