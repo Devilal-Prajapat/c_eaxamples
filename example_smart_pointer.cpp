@@ -35,6 +35,7 @@ int main()
     shared_ptr<Rectangle> p2 = p1; // allowed in shared_ptr;
     cout<<p2->area()<<endl;
     cout<<p1->area()<<endl;
+    cout<<p1.use_count()<<endl;  // number of shared ptr
    
     return 0;
 }
