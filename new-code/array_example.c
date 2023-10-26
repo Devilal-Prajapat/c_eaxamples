@@ -56,6 +56,29 @@ void delete(struct Array *arr,int idx)
     }
 }
 
+
+void swap(int *x, int *y)
+{
+    int temp = *x;
+    *x= *y;
+    *y = temp;
+}
+
+
+int LinerSearch(struct Array *arr, int key)
+{
+    for(int i = 0; i < arr->len; i++)
+    {
+        if(key == arr->A[i])
+        {
+            //swap(&arr->A[i], &arr->A[i-1]); // Transposition
+            //swap(&arr->A[i], &arr->A[0]);  // Move to head
+            return i;
+        }
+    }
+    return -1;
+}
+
 int main()
 {
     struct Array arr = {{1, 2, 5, 7, 9},10, 5};
@@ -65,7 +88,11 @@ int main()
     display(arr);
     insert(&arr, 0 ,8);
     display(arr);
-    delete( &arr, 7);
+    delete( &arr, 1);
+    display(arr);
+    printf("\r\nElelment found at idx = %d",LinerSearch(&arr, 81));
+    display(arr);
+    printf("\r\nElelment found at idx = %d",LinerSearch(&arr, 81));
     display(arr);
     
     return 0;
