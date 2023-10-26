@@ -79,6 +79,55 @@ int LinerSearch(struct Array *arr, int key)
     return -1;
 }
 
+int BinarySerach(struct Array arr, int key)
+{
+    int l = 0;
+    int h = arr.len - 1;
+    int mid;
+   while(l<=h)
+   {
+        mid = (l + h) / 2;
+        
+        if(key == arr.A[mid])
+        {
+            return mid;
+        }
+        else if(key < arr.A[mid])
+        {
+            h = mid - 1;
+        }
+        else if(key > arr.A[mid])
+        {
+            l = mid + 1;
+        }   
+   }
+   return -1;
+}
+
+int RBinSerach( int A[], int l, int h, int key)
+{
+   int mid;
+   while(l<=h)
+   {
+        mid = (l + h) / 2;
+        
+        if(key == A[mid])
+        {
+            return mid;
+        }
+        else if(key < A[mid])
+        {
+            return RBinSerach(A,l, mid-1, key);
+        }
+        else if(key > A[mid])
+        {
+           return RBinSerach(A, mid+1, h, key);;
+        }   
+   }
+   return -1;
+}
+
+
 int main()
 {
     struct Array arr = {{1, 2, 5, 7, 9},10, 5};
@@ -86,7 +135,7 @@ int main()
     display(arr);
     append(&arr, 81);
     display(arr);
-    insert(&arr, 0 ,8);
+  //  insert(&arr, 0 ,8);
     display(arr);
     delete( &arr, 1);
     display(arr);
@@ -94,6 +143,19 @@ int main()
     display(arr);
     printf("\r\nElelment found at idx = %d",LinerSearch(&arr, 81));
     display(arr);
+    
+    // required sorted array for binary searching
+    printf("\r\nElelment found at idx = %d",BinarySerach(arr, 1));
+    display(arr);
+    printf("\r\nElelment found at idx = %d",BinarySerach(arr, 8));
+    display(arr);
+    
+     // required sorted array for binary searching
+    printf("\r\nElelment found at idx = %d",RBinSerach(arr.A, 0, 6, 5 ));
+    display(arr);
+    printf("\r\nElelment found at idx = %d",RBinSerach(arr.A, 0, 6, 9));
+    display(arr);
+    
     
     return 0;
 }
