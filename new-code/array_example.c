@@ -128,6 +128,51 @@ int RBinSerach( int A[], int l, int h, int key)
 }
 
 
+void Set(struct Array *arr, int idx, int x)
+{
+    if(idx>=0 && idx < arr->len)
+    {
+        arr->A[idx] = x;
+    }
+}
+
+int Get(struct Array arr, int idx)
+{
+    if(idx>=0 && idx < arr.len)
+    {
+        return arr.A[idx];
+    }
+    return -1;
+}
+
+int Max(struct Array arr)
+{
+    int max = arr.A[0];
+    for(int i = 1; i<arr.len ; i++)
+    {
+        if(arr.A[i]>max)
+        {
+            max = arr.A[i];
+        }
+    }
+    return max;
+}
+
+
+int Min(struct Array arr)
+{
+    int min = arr.A[0];
+    for(int i = 1; i<arr.len ; i++)
+    {
+        if(arr.A[i]<min)
+        {
+            min = arr.A[i];
+        }
+    }
+    return min;
+}
+
+
 int main()
 {
     struct Array arr = {{1, 2, 5, 7, 9},10, 5};
@@ -154,7 +199,12 @@ int main()
     printf("\r\nElelment found at idx = %d",RBinSerach(arr.A, 0, 6, 5 ));
     display(arr);
     printf("\r\nElelment found at idx = %d",RBinSerach(arr.A, 0, 6, 9));
-    display(arr);
+
+    printf("\r\nMin element = %d",Min(arr));
+    printf("\r\nMax element = %d",Max(arr));
+    Set(&arr, 1, 6);
+    printf("\r\n set element at idx %d",1);
+    printf("\r\n element at idx %d is %d",1, Get(arr,1));
     
     
     return 0;
