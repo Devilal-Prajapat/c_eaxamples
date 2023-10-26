@@ -46,9 +46,9 @@ void insert(struct Array *arr,int idx, int x)
 
 void delete(struct Array *arr,int idx)
 {
-    if(idx >= 0 && idx <= arr->len)
+    if(idx >= 0 && idx < arr->len)
     {
-        for(int i=idx; i < arr->len ; i++)
+        for(int i=idx; i < arr->len -1 ; i++)
         {
             arr->A[i] = arr->A[i+1];
         }
@@ -65,7 +65,7 @@ int main()
     display(arr);
     insert(&arr, 0 ,8);
     display(arr);
-    delete( &arr, 8);
+    delete( &arr, 7);
     display(arr);
     
     return 0;
