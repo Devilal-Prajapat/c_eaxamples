@@ -1,3 +1,11 @@
+/******************************************************************************
+
+                              Online C++ Debugger.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Debug" button to debug it.
+
+*******************************************************************************/
+
 #include <stdio.h>
 
 struct Array{
@@ -36,13 +44,28 @@ void insert(struct Array *arr,int idx, int x)
     }
 }
 
+void delete(struct Array *arr,int idx)
+{
+    if(idx >= 0 && idx <= arr->len)
+    {
+        for(int i=idx; i < arr->len ; i++)
+        {
+            arr->A[i] = arr->A[i+1];
+        }
+        arr->len -= 1;
+    }
+}
+
 int main()
 {
-    struct Array arr = {{1, 2, 5, 7, 9},10, 5};    
+    struct Array arr = {{1, 2, 5, 7, 9},10, 5};
+    
     display(arr);
     append(&arr, 81);
     display(arr);
     insert(&arr, 0 ,8);
+    display(arr);
+    delete( &arr, 8);
     display(arr);
     
     return 0;
