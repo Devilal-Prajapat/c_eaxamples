@@ -7,6 +7,7 @@ Write your code in this editor and press "Debug" button to debug it.
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 
 struct Array{
     int A[10];
@@ -227,6 +228,37 @@ int isSorted(struct Array arr)
     return 1;
 }
 
+struct Array *MergeArray(struct Array a1, struct Array a2)
+{
+    int i = 0, j=0,k=0;
+    struct Array *arr = (struct Array *)malloc(sizeof(struct Array));
+    while(i < a1.len && j < a2.len)
+    {
+        if(a1.A[i]<a2.A[j])
+        {
+            arr->A[k++] = a1.A[i++];
+        }
+        else
+        {
+            arr->A[k++] = a2.A[j++];
+        }
+    }
+    
+    for(;i<a1.len;i++)
+    {
+        arr->A[k++] = a1.A[i];
+    }
+    
+    for(;j<a2.len; j++)
+    {
+        arr->A[k++] = a2.A[j];
+    }
+    arr->len = a1.len + a2.len;
+    arr->size = 10;
+    return arr;
+    
+}
+
 
 int main()
 {
@@ -239,6 +271,10 @@ int main()
     Insert_InSortedArray(&arr,0);
     display(arr);
     printf("\r\nisSorted : %d",isSorted(arr));
+    struct Array a1 = {{2, 5, 11, 15, 81},10, 5};
+    struct Array a2 = {{1, 4, 7, 13, 67},10, 5};
+    struct Array *arr1 = MergeArray(a1, a2);
+    display(*arr1);
     
     return 0;
 }
