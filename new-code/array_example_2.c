@@ -197,16 +197,48 @@ void Reverse_single_arr(struct Array *arr)
     
 }
 
+void Insert_InSortedArray(struct Array *arr, int x)
+{
+    if(arr->len == arr->size)
+    {
+        return;
+    }
+    
+    int i = arr->len - 1;
+    while(i >= 0 && arr->A[i]>x)
+    {
+        arr->A[i+1] = arr->A[i];
+        i--;
+    }
+    arr->A[i+1] = x;
+    arr->len++;
+}
+
+
+int isSorted(struct Array arr)
+{
+    for(int i = 0; i< arr.len -1 ; i++)
+    {
+       if(arr.A[i]>arr.A[i+1])
+       {
+           return 0;
+       }
+    }
+    return 1;
+}
+
 
 int main()
 {
-    struct Array arr = {{1, 2, 5, 7, 9, 81, 55},10, 7};
+    struct Array arr = {{1, 2, 11, 7, 9, 55, 81},10, 7};
     
     display(arr);
     Reverse(&arr);
     display(arr);
     Reverse_single_arr(&arr);
+    Insert_InSortedArray(&arr,0);
     display(arr);
+    printf("\r\nisSorted : %d",isSorted(arr));
     
     return 0;
 }
