@@ -1,11 +1,3 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
-C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
-Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -20,31 +12,28 @@ struct node *first = NULL;
 void append(int data)
 {
     struct node *temp;
+    temp = (struct node *)malloc(sizeof(struct node *));
+    if(temp == NULL)
+    {
+        printf("\r\nNot enough memeory to create node");
+        return;
+    }
+    
+    temp->data =  data;
+    temp->next = NULL;
+   
     if(first == NULL)
     {
-       first = (struct node *)malloc(sizeof(struct node *));
-       if(first== NULL){
-           printf("\r\nNot enough memeory to create first node");
-           return;
-       }
-       else
-       {
-           printf("\r\ncreated first node with data: %d", data);
-
-           first->data = data;
-           first->next = NULL;
-       }
+        first = temp;
     }
-    else{
+    else
+    {
         struct node *q = first;
         while(q->next != NULL)
         {
            q = q->next;
         }
-        temp = (struct node *)malloc(sizeof(struct node *));
         printf("\r\nAdding node with data: %d", data);
-        temp->data =  data;
-        temp->next = NULL;
         q->next = temp;
     }
 }
@@ -98,6 +87,32 @@ int count(struct node *p)
     return cnt;
 }
 
+int sum(struct node *p)
+{
+    struct node *temp = p;
+    int sum = 0;
+    while(temp != NULL)
+    {
+        sum += temp->data;
+        temp = temp->next;
+    }
+    return sum;
+}
+
+
+int recursive_sum(struct node *p)
+{
+    struct node *temp = p;
+    if(temp == NULL)
+    {
+        return 0;
+    }else
+    {
+        return recursive_sum(temp->next) + temp->data;
+    }
+    
+}
+
 int main()
 {
     Add_AtBegin(99);
@@ -112,5 +127,7 @@ int main()
     append(-5);
     display(first);
     printf("\r\nNumber of nodes: %d", count(first));
+    printf("\r\nSum of nodes: %d", sum(first));
+    printf("\r\nSum of nodes using recursion : %d", recursive_sum(first));
     return 0;
 }
