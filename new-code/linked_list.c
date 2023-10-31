@@ -141,6 +141,44 @@ int recursive_max(struct node *p)
     }
 }
 
+struct node *Search(struct node *p, int key)
+{
+    struct node *temp = p;
+    while(temp != NULL)
+    {
+        if(temp->data == key)
+        {
+            return temp;    
+        }
+        temp = temp->next;
+    }
+    return NULL;
+}
+
+struct node *ImprovedSearch(struct node *p, int key)
+{
+    struct node *temp = p;
+    struct node *q = NULL;
+    int cnt = 0;
+    while(temp != NULL)
+    {
+        if(temp->data == key)
+        {
+            if(cnt == 0)
+               return temp; 
+      
+            q->next = temp->next;
+            temp->next = first;
+            first= temp;
+            return temp;    
+        }
+        cnt++;
+        q = temp;
+        temp = temp->next;
+    }
+    return NULL;
+}
+
 int main()
 {
     Add_AtBegin(99);
@@ -159,5 +197,42 @@ int main()
     printf("\r\nSum of nodes using recursion : %d", recursive_sum(first));
     printf("\r\nMax value : %d", Maximum(first));
     printf("\r\nMax value using recursion : %d", recursive_max(first));
+   
+    Search(first,12);
+    display(first);
+    
+    struct node *p = Search(first,12);
+    if(p)
+    {
+        printf("\r\nLiner Search key found : %d", p->data);
+    }
+    else
+    {
+        printf("\r\nkey not found");
+    }
+    
+    display(first);
+    struct node *q = ImprovedSearch(first,12);
+    q = ImprovedSearch(first,5);
+   
+    if(q)
+    {
+        printf("\r\nImproved Liner Search key found : %d", q->data);
+    }
+    else
+    {
+        printf("\r\nkey not found");
+    }
+    display(first);
+    q = ImprovedSearch(first,5);
+    if(q)
+    {
+        printf("\r\nImproved Liner Search key found : %d", q->data);
+    }
+    else
+    {
+        printf("\r\nkey not found");
+    }
+    display(first);
     return 0;
 }
