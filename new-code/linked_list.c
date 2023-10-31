@@ -86,6 +86,18 @@ void Recursivedisplay(struct node *p)
     }
 }
 
+int count(struct node *p)
+{
+    struct node *temp = p;
+    int cnt = 0;
+    while(temp != 0)
+    {
+        cnt += 1;
+        temp = temp->next;
+    }
+    return cnt;
+}
+
 int main()
 {
     Add_AtBegin(99);
@@ -99,5 +111,6 @@ int main()
     Add_AtBegin(5);
     append(-5);
     display(first);
+    printf("\r\nNumber of nodes: %d", count(first));
     return 0;
 }
