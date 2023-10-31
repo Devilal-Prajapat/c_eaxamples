@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <limits.h>
 
 struct node{
     int data;
@@ -110,7 +110,35 @@ int recursive_sum(struct node *p)
     {
         return recursive_sum(temp->next) + temp->data;
     }
-    
+}
+
+int Maximum(struct node *p)
+{
+    struct node *temp = p;
+    int max = INT_MIN;
+    while(temp != NULL)
+    {
+        if(temp->data > max)
+        {
+            max = temp->data;
+        }
+        temp = temp->next;
+    }
+    return max;
+}
+
+int recursive_max(struct node *p)
+{
+    struct node *temp = p;
+    if(temp == NULL)
+    {
+        return INT_MIN;
+    }else
+    {
+        int x = recursive_max(temp->next);
+        return (temp->data > x ) ? temp->data : x;
+       
+    }
 }
 
 int main()
@@ -129,5 +157,7 @@ int main()
     printf("\r\nNumber of nodes: %d", count(first));
     printf("\r\nSum of nodes: %d", sum(first));
     printf("\r\nSum of nodes using recursion : %d", recursive_sum(first));
+    printf("\r\nMax value : %d", Maximum(first));
+    printf("\r\nMax value using recursion : %d", recursive_max(first));
     return 0;
 }
