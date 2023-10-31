@@ -1,3 +1,11 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -25,21 +33,36 @@ void append(int data)
 
            first->data = data;
            first->next = NULL;
-           last = first;
        }
     }
     else{
-    
-        temp = (struct node *)malloc(sizeof(struct node *));
-        if(temp== NULL){
-           printf("\r\nNot enough memeory to add node");
-           return;
+        struct node *q = first;
+        while(q->next != NULL)
+        {
+           q = q->next;
         }
-         printf("\r\nAdding node with data: %d", data);
+        temp = (struct node *)malloc(sizeof(struct node *));
+        printf("\r\nAdding node with data: %d", data);
         temp->data =  data;
         temp->next = NULL;
-        last->next = temp;
-        last = temp;
+        q->next = temp;
+    }
+}
+
+void Add_AtBegin(int data)
+{
+    struct node *temp;
+    temp = (struct node *)malloc(sizeof(struct node *));
+    printf("\r\nAdding node with data: %d", data);
+    temp->data =  data;
+    temp->next = NULL;
+    if(first == NULL)
+    {
+       first = temp;
+    }
+    else{
+        temp->next = first;
+        first = temp;
     }
 }
 
@@ -55,7 +78,7 @@ void display(struct node *p)
 }
 
 void Recursivedisplay(struct node *p)
-{  
+{
     if(p != NULL)
     {
         printf("\r\nElement is: %d", p->data);
@@ -65,10 +88,16 @@ void Recursivedisplay(struct node *p)
 
 int main()
 {
+    Add_AtBegin(99);
+    Add_AtBegin(100);
     append(10);
     append(12);
     append(1);
     display(first);
     Recursivedisplay(first);
+    Add_AtBegin(0);
+    Add_AtBegin(5);
+    append(-5);
+    display(first);
     return 0;
 }
