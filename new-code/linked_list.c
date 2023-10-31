@@ -19,7 +19,7 @@ struct node *first = NULL;
 
 void append(int data)
 {
-    struct node *last,*temp;
+    struct node *temp;
     if(first == NULL)
     {
        first = (struct node *)malloc(sizeof(struct node *));
