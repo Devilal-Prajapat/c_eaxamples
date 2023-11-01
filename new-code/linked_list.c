@@ -38,6 +38,44 @@ void append(int data)
     }
 }
 
+void Insert(int pos, int data)
+{
+    struct node *temp;
+    temp = (struct node *)malloc(sizeof(struct node *));
+    if(temp == NULL)
+    {
+        printf("\r\nNot enough memeory to create node");
+        return;
+    }
+    
+    temp->data =  data;
+    temp->next = NULL;
+
+    if(first == NULL)
+    {
+        first = temp;
+    }
+    else
+    {
+        if(pos == 0)
+        {
+            temp->next = first;
+            first = temp;
+        }
+        else if(pos > 0)
+        {
+            struct node *q = first;
+            for(int i = 0; i< pos - 1; i++)
+            {
+               q = q->next;
+            }
+            printf("\r\nAdding node with data: %d", data);
+            temp->next = q->next;
+            q->next = temp;
+        }
+    }
+}
+
 void Add_AtBegin(int data)
 {
     struct node *temp;
@@ -186,6 +224,9 @@ int main()
     append(10);
     append(12);
     append(1);
+    Insert(1, 9);
+    Insert(0, 101);
+    Insert(7, 102);
     display(first);
     Recursivedisplay(first);
     Add_AtBegin(0);
