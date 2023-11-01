@@ -9,6 +9,29 @@ struct node{
 
 struct node *first = NULL;
 
+void display(struct node *p)
+{
+    struct node *temp = p;
+    printf("\r\nElements are:");
+    while(temp != NULL)
+    {
+        printf(" %d", temp->data);
+        temp = temp->next;
+    }
+}
+
+int count(struct node *p)
+{
+    struct node *temp = p;
+    int cnt = 0;
+    while(temp != 0)
+    {
+        cnt += 1;
+        temp = temp->next;
+    }
+    return cnt;
+}
+
 void append(int data)
 {
     struct node *temp;
@@ -41,6 +64,10 @@ void append(int data)
 void Insert(int pos, int data)
 {
     struct node *temp;
+    if(pos < 0 || pos > count(first))
+    {
+        return;
+    }
     temp = (struct node *)malloc(sizeof(struct node *));
     if(temp == NULL)
     {
@@ -93,16 +120,6 @@ void Add_AtBegin(int data)
     }
 }
 
-void display(struct node *p)
-{
-    struct node *temp = p;
-    printf("\r\nElements are:");
-    while(temp != NULL)
-    {
-        printf(" %d", temp->data);
-        temp = temp->next;
-    }
-}
 
 void Recursivedisplay(struct node *p)
 {
@@ -113,17 +130,6 @@ void Recursivedisplay(struct node *p)
     }
 }
 
-int count(struct node *p)
-{
-    struct node *temp = p;
-    int cnt = 0;
-    while(temp != 0)
-    {
-        cnt += 1;
-        temp = temp->next;
-    }
-    return cnt;
-}
 
 int sum(struct node *p)
 {
@@ -225,7 +231,7 @@ int main()
     append(12);
     append(1);
     Insert(1, 9);
-    Insert(0, 101);
+    Insert(6, 101);
     Insert(7, 102);
     display(first);
     Recursivedisplay(first);
