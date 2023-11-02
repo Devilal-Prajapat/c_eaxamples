@@ -311,14 +311,37 @@ int isSorted()
     return 1;
 }
 
+void removeDuplicateFromSorted()
+{
+    struct node *p = first;
+    struct node *q = first->next;
+    while(q != NULL)
+    {
+        if(p->data != q->data)
+        {
+            p = q;
+            q = q->next;
+        }
+        else
+        {
+            p->next = q->next;
+            free(q);
+            q = p->next;
+        }
+    }
+    
+}
+
 int main()
 {
 
     append(10);
     append(12);
     append(13);
+    append(13);
+    
     display(first);
-
+    SortedInsert(first, 5);
     SortedInsert(first, 5);
     SortedInsert(first, 23);
     SortedInsert(first, 15);
@@ -328,10 +351,10 @@ int main()
     display(first);
     char ch = isSorted()?'Y':'N';
     printf("\r\nlinkedlist sorted: %c", ch);
-    Insert(2, 2);
+    
     display(first);
-    ch = isSorted()?'Y':'N';
-    printf("\r\nlinkedlist sorted: %c", ch);
+    removeDuplicateFromSorted();
+    display(first);
 
     return 0;
 }
