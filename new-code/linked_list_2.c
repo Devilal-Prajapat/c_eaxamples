@@ -297,6 +297,20 @@ int Delete(int pos)
     return x;
 }
 
+int isSorted()
+{
+    struct node *p = first;
+    int x = INT_MIN;
+    while(p != NULL)
+    {
+        if(p->data < x)
+            return 0;
+        x = p->data;
+        p = p->next;
+    }
+    return 1;
+}
+
 int main()
 {
 
@@ -312,6 +326,12 @@ int main()
     Delete(1);
     Delete(4);
     display(first);
+    char ch = isSorted()?'Y':'N';
+    printf("\r\nlinkedlist sorted: %c", ch);
+    Insert(2, 2);
+    display(first);
+    ch = isSorted()?'Y':'N';
+    printf("\r\nlinkedlist sorted: %c", ch);
 
     return 0;
 }
