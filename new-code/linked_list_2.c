@@ -263,6 +263,40 @@ struct node *ImprovedSearch(struct node *p, int key)
     return NULL;
 }
 
+int Delete(int pos)
+{
+    struct node *p = first;
+    struct node *q = NULL;
+    int x = -1;
+    
+    if(pos < 1 || pos > count(p))
+        return - 1;
+    
+    if(pos ==  1)
+    {
+        first = first->next;
+        x = p->data;
+        free(p);
+        p = NULL;
+    }
+    else
+    {
+        for(int  i = 0; i < pos - 1; i++)
+        {
+            q = p;
+            p = p->next;
+        }
+        if(p)
+        {
+            q->next = p->next;
+            x = p->data;
+            free(p);
+            p = NULL;
+        }
+    }
+    return x;
+}
+
 int main()
 {
 
@@ -274,6 +308,9 @@ int main()
     SortedInsert(first, 5);
     SortedInsert(first, 23);
     SortedInsert(first, 15);
+    display(first);
+    Delete(1);
+    Delete(4);
     display(first);
 
     return 0;
